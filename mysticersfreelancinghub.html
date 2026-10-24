@@ -1,0 +1,1676 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mysticers - Freelancing & Business Hub</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        obsidian: {
+                            900: '#03050B',
+                            800: '#070A14',
+                            700: '#0F172A',
+                            600: '#1E293B'
+                        },
+                        neonCyan: '#06B6D4',
+                        neonViolet: '#8B5CF6',
+                        amberGold: '#F59E0B'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #03050B;
+            color: #F8FAFC;
+        }
+
+        .glass-card {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(6, 182, 212, 0.3);
+            box-shadow: 0 10px 30px -10px rgba(6, 182, 212, 0.15);
+        }
+
+        .glass-nav {
+            background: rgba(7, 10, 20, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glow-text-cyan {
+            text-shadow: 0 0 12px rgba(6, 182, 212, 0.5);
+        }
+
+        .glow-text-violet {
+            text-shadow: 0 0 12px rgba(139, 92, 246, 0.5);
+        }
+
+        .glow-btn {
+            box-shadow: 0 0 15px rgba(6, 182, 212, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .glow-btn:hover {
+            box-shadow: 0 0 25px rgba(6, 182, 212, 0.6);
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #03050B;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #1E293B;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #06B6D4;
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0.92);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .animate-scale-in {
+            animation: scaleIn 0.25s ease-out forwards;
+        }
+
+        @keyframes toastSlide {
+            0% {
+                transform: translateY(-100%) scale(0.9);
+                opacity: 0;
+            }
+
+            15% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+
+            85% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-100%) scale(0.9);
+                opacity: 0;
+            }
+        }
+
+        .animate-toast {
+            animation: toastSlide 4s ease-in-out forwards;
+        }
+
+        .star-rating i {
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+    </style>
+</head>
+
+<body class="bg-obsidian-900 text-slate-100 min-h-screen flex flex-col selection:bg-neonCyan selection:text-black">
+
+    <!-- NAVIGATION BAR -->
+    <header class="sticky top-0 z-40 glass-nav transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="resetView()">
+                    <div
+                        class="w-11 h-11 rounded-xl bg-gradient-to-tr from-neonCyan to-neonViolet flex items-center justify-center text-black font-extrabold text-2xl shadow-lg shadow-neonCyan/20">
+                        <i class="fa-solid fa-bolt text-black text-xl"></i>
+                    </div>
+                    <div>
+                        <span class="text-2xl font-black tracking-wider text-white">MYSTIC<span
+                                class="text-neonCyan glow-text-cyan">ERS</span></span>
+                        <p class="text-[10px] text-slate-400 font-medium tracking-widest uppercase -mt-1">Freelance &
+                            Business Hub</p>
+                    </div>
+                </div>
+
+                <!-- Desktop Nav Items -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#explore"
+                        class="text-sm font-semibold text-slate-300 hover:text-neonCyan transition-colors">Explore
+                        Hub</a>
+                    <a href="#categories"
+                        class="text-sm font-semibold text-slate-300 hover:text-neonCyan transition-colors">Categories</a>
+                    <a href="#reviews"
+                        class="text-sm font-semibold text-slate-300 hover:text-neonCyan transition-colors">Platform
+                        Ratings</a>
+                    <a href="#contact"
+                        class="text-sm font-semibold text-slate-300 hover:text-neonCyan transition-colors">Contact
+                        Platform</a>
+                </nav>
+
+                <!-- Session Button -->
+                <div class="flex items-center space-x-3">
+                    <div id="navSessionContainer">
+                        <button type="button" onclick="openPhoneModal()"
+                            class="glow-btn bg-gradient-to-r from-neonCyan to-cyan-500 text-obsidian-900 font-bold px-5 py-2.5 rounded-xl flex items-center space-x-2 text-sm hover:brightness-110 active:scale-95 transition-all">
+                            <i class="fa-solid fa-store"></i>
+                            <span>Business Owner Login</span>
+                        </button>
+                    </div>
+
+                    <button type="button" onclick="toggleMobileNav()"
+                        class="md:hidden text-slate-300 hover:text-white p-2 text-xl">
+                        <i class="fa-solid fa-bars" id="mobileNavIcon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobileDrawer" class="hidden md:hidden border-t border-slate-800 bg-obsidian-800 px-4 py-4 space-y-3">
+            <a href="#explore" onclick="toggleMobileNav()"
+                class="block text-slate-300 font-medium hover:text-neonCyan">Explore Hub</a>
+            <a href="#categories" onclick="toggleMobileNav()"
+                class="block text-slate-300 font-medium hover:text-neonCyan">Categories</a>
+            <a href="#reviews" onclick="toggleMobileNav()"
+                class="block text-slate-300 font-medium hover:text-neonCyan">Platform Ratings</a>
+            <a href="#contact" onclick="toggleMobileNav()"
+                class="block text-slate-300 font-medium hover:text-neonCyan">Contact Platform</a>
+        </div>
+    </header>
+
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div id="toastContainer" class="fixed top-24 left-0 right-0 z-50 flex justify-center pointer-events-none px-4">
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-grow">
+
+        <!-- HERO SECTION -->
+        <section class="relative py-16 lg:py-24 overflow-hidden border-b border-slate-800/80">
+            <div
+                class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-neonCyan/10 rounded-full blur-3xl pointer-events-none">
+            </div>
+            <div class="absolute top-1/3 right-10 w-80 h-80 bg-neonViolet/10 rounded-full blur-3xl pointer-events-none">
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+                <div
+                    class="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full bg-slate-800/80 border border-slate-700/80 text-neonCyan text-xs font-semibold mb-6">
+                    <span class="w-2 h-2 rounded-full bg-neonCyan animate-ping"></span>
+                    <span>The Premier Verified Business Directory</span>
+                </div>
+
+                <h1 class="text-4xl sm:text-6xl font-black text-white tracking-tight leading-tight max-w-4xl mx-auto">
+                    Discover Top Freelancers & Local <span
+                        class="bg-gradient-to-r from-neonCyan via-teal-300 to-neonViolet bg-clip-text text-transparent">Business
+                        Experts</span>
+                </h1>
+
+                <p class="mt-6 text-base sm:text-lg text-slate-400 max-w-2xl mx-auto font-normal leading-relaxed">
+                    Connect directly with verified local businesses, software creators, freelancers, and stores. Connect
+                    via WhatsApp, phone, email, or Google Maps in one tap.
+                </p>
+
+                <!-- Search Container -->
+                <div class="mt-10 max-w-3xl mx-auto">
+                    <div class="glass-card p-2 sm:p-3 rounded-2xl flex flex-col sm:flex-row gap-2 shadow-2xl">
+                        <div class="relative flex-grow">
+                            <i
+                                class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                            <input type="text" id="searchInput" oninput="handleFilterChange()"
+                                placeholder="Search business name, skills, services, or location..."
+                                class="w-full bg-obsidian-900/90 border border-slate-800 text-white placeholder-slate-500 rounded-xl pl-11 pr-4 py-3 text-sm focus:outline-none focus:border-neonCyan transition-all">
+                        </div>
+
+                        <div class="flex gap-2">
+                            <select id="categoryFilter" onchange="handleFilterChange()"
+                                class="bg-obsidian-900 border border-slate-800 text-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-neonCyan font-medium cursor-pointer">
+                                <option value="ALL">All Categories</option>
+                                <option value="Web & Tech">Web & Tech</option>
+                                <option value="Design & Creative">Design & Creative</option>
+                                <option value="Marketing & SEO">Marketing & SEO</option>
+                                <option value="Food & Cafe">Food & Cafe</option>
+                                <option value="Fitness & Health">Fitness & Health</option>
+                                <option value="Legal & Finance">Legal & Finance</option>
+                            </select>
+
+                            <button type="button" onclick="handleFilterChange()"
+                                class="bg-neonCyan hover:bg-cyan-400 text-obsidian-900 font-bold px-6 py-3 rounded-xl text-sm transition-all flex items-center justify-center">
+                                <i class="fa-solid fa-filter mr-2"></i> Filter
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Quick Tags -->
+                    <div class="flex flex-wrap items-center justify-center gap-2 mt-4 text-xs text-slate-400"
+                        id="categories">
+                        <span class="font-medium text-slate-500">Popular:</span>
+                        <button type="button" onclick="setCategoryQuickFilter('Web & Tech')"
+                            class="px-3 py-1 rounded-lg bg-slate-800/60 hover:bg-slate-700 text-slate-300 border border-slate-700/50 transition">💻
+                            Web Design</button>
+                        <button type="button" onclick="setCategoryQuickFilter('Marketing & SEO')"
+                            class="px-3 py-1 rounded-lg bg-slate-800/60 hover:bg-slate-700 text-slate-300 border border-slate-700/50 transition">📈
+                            Digital Marketing</button>
+                        <button type="button" onclick="setCategoryQuickFilter('Food & Cafe')"
+                            class="px-3 py-1 rounded-lg bg-slate-800/60 hover:bg-slate-700 text-slate-300 border border-slate-700/50 transition">☕
+                            Cafes</button>
+                        <button type="button" onclick="setCategoryQuickFilter('Fitness & Health')"
+                            class="px-3 py-1 rounded-lg bg-slate-800/60 hover:bg-slate-700 text-slate-300 border border-slate-700/50 transition">🏋️
+                            Fitness</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DIRECTORY SECTION -->
+        <section id="explore" class="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div
+                class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 pb-4 border-b border-slate-800 gap-4">
+                <div>
+                    <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                        <span>Featured Businesses</span>
+                        <span id="businessCountBadge"
+                            class="bg-slate-800 text-neonCyan text-xs px-2.5 py-0.5 rounded-full font-mono border border-slate-700">0</span>
+                    </h2>
+                    <p class="text-slate-400 text-sm mt-1">Directly connect with shop owners & service providers</p>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <label
+                        class="inline-flex items-center cursor-pointer text-xs font-semibold text-slate-300 bg-obsidian-800 px-3 py-2 rounded-xl border border-slate-800">
+                        <input type="checkbox" id="verifiedOnlyToggle" onchange="handleFilterChange()"
+                            class="sr-only peer">
+                        <div
+                            class="relative w-9 h-5 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-neonCyan">
+                        </div>
+                        <span class="ms-2">Verified Only <i
+                                class="fa-solid fa-circle-check text-neonCyan ml-1"></i></span>
+                    </label>
+
+                    <select id="sortSelect" onchange="handleFilterChange()"
+                        class="bg-obsidian-800 border border-slate-800 text-slate-300 rounded-xl px-3 py-2 text-xs font-medium focus:outline-none focus:border-neonCyan">
+                        <option value="featured">Featured First</option>
+                        <option value="rating">Highest Rated</option>
+                        <option value="newest">Newest First</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Business Grid -->
+            <div id="businessGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+
+            <!-- Empty State -->
+            <div id="emptyState"
+                class="hidden text-center py-16 bg-slate-900/30 rounded-3xl border border-dashed border-slate-800">
+                <i class="fa-solid fa-store-slash text-5xl text-slate-600 mb-4"></i>
+                <h3 class="text-lg font-bold text-slate-300">No Businesses Found</h3>
+                <p class="text-slate-500 text-sm mt-1">Try resetting your search filters or add a new business listing!
+                </p>
+                <button type="button" onclick="resetFilters()"
+                    class="mt-4 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-neonCyan font-semibold text-xs rounded-xl border border-slate-700 transition">
+                    Clear Search Filters
+                </button>
+            </div>
+        </section>
+
+        <!-- WEBSITE REVIEWS & RATING FORM SECTION -->
+        <section id="reviews" class="py-16 bg-obsidian-800/30 border-t border-slate-800/80">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-10">
+                    <div
+                        class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-cyan-900/30 border border-cyan-700/50 text-neonCyan text-xs font-semibold mb-3">
+                        <i class="fa-solid fa-star"></i>
+                        <span>Platform Testimonials</span>
+                    </div>
+                    <h2 class="text-3xl font-extrabold text-white">Rate & Review Mysticers</h2>
+                    <p class="text-slate-400 mt-2 text-sm">Share your feedback with our platform or read community
+                        reviews.</p>
+                </div>
+
+                <!-- Rate Platform Form -->
+                <div class="max-w-2xl mx-auto mb-12 glass-card p-6 rounded-3xl border border-slate-700">
+                    <h3 class="text-lg font-bold text-white mb-2 text-center">Leave a Platform Rating</h3>
+                    <form onsubmit="submitPlatformReview(event)" class="space-y-4">
+                        <div class="flex items-center justify-center gap-2 star-rating text-2xl text-slate-600"
+                            id="platformStarInput">
+                            <i class="fa-solid fa-star" onclick="setStarRating('platform', 1)"></i>
+                            <i class="fa-solid fa-star" onclick="setStarRating('platform', 2)"></i>
+                            <i class="fa-solid fa-star" onclick="setStarRating('platform', 3)"></i>
+                            <i class="fa-solid fa-star" onclick="setStarRating('platform', 4)"></i>
+                            <i class="fa-solid fa-star" onclick="setStarRating('platform', 5)"></i>
+                        </div>
+                        <input type="hidden" id="platformRatingVal" value="0">
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <input type="text" id="platformReviewerName" required placeholder="Your Name"
+                                class="bg-obsidian-900 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-neonCyan">
+                            <input type="text" id="platformReviewerRole" required
+                                placeholder="Your Role / Business Name"
+                                class="bg-obsidian-900 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-neonCyan">
+                        </div>
+
+                        <textarea id="platformReviewComment" rows="3" required
+                            placeholder="What do you think of Mysticers platform?"
+                            class="w-full bg-obsidian-900 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-neonCyan"></textarea>
+
+                        <button type="submit"
+                            class="w-full bg-gradient-to-r from-neonCyan to-neonViolet text-obsidian-900 font-extrabold py-2.5 rounded-xl text-xs hover:brightness-110 transition">
+                            Submit Platform Review
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Reviews Grid -->
+                <div id="platformReviewsContainer" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section id="contact" class="py-16 bg-obsidian-800/50 border-t border-slate-800/80">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <div
+                            class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-violet-900/30 border border-violet-700/50 text-neonViolet text-xs font-semibold mb-4">
+                            <i class="fa-solid fa-headset"></i>
+                            <span>24/7 Platform Support</span>
+                        </div>
+                        <h2 class="text-3xl font-extrabold text-white">Need Support or Want to Feature Your Enterprise?
+                        </h2>
+                        <p class="text-slate-400 mt-4 leading-relaxed text-sm sm:text-base">
+                            Mysticers is built to empower freelancers, local shop proprietors, and service agencies.
+                            Contact our central platform team directly for help setting up your listing or custom
+                            marketing partnerships.
+                        </p>
+
+                        <div class="mt-8 space-y-4">
+                            <div
+                                class="flex items-center space-x-4 p-4 rounded-2xl bg-obsidian-900/80 border border-slate-800">
+                                <div
+                                    class="w-12 h-12 rounded-xl bg-neonCyan/10 text-neonCyan flex items-center justify-center text-xl">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-slate-400">Official Platform Email</p>
+                                    <a href="mailto:support@mysticers.com"
+                                        class="text-white font-semibold hover:text-neonCyan transition">support@mysticers.com</a>
+                                </div>
+                            </div>
+
+                            <div
+                                class="flex items-center space-x-4 p-4 rounded-2xl bg-obsidian-900/80 border border-slate-800">
+                                <div
+                                    class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl">
+                                    <i class="fa-brands fa-whatsapp"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-slate-400">Founder & Support WhatsApp</p>
+                                    <a href="https://wa.me/919876543210?text=Hello%20Mysticers%20Team%2C%20I%20have%20an%20inquiry%20regarding%20the%20platform."
+                                        target="_blank"
+                                        class="text-white font-semibold hover:text-emerald-400 transition">+91 98765
+                                        43210</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-6 sm:p-8 rounded-3xl relative">
+                        <h3 class="text-xl font-bold text-white mb-2">Send Direct Inquiry</h3>
+                        <p class="text-xs text-slate-400 mb-6">Fill in your request and our admin team will reply within
+                            2 hours.</p>
+
+                        <form onsubmit="handleContactSubmit(event)" class="space-y-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 mb-1">Your Full Name</label>
+                                <input type="text" id="contactName" required placeholder="e.g. Rahul Sharma"
+                                    class="w-full bg-obsidian-900 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-neonCyan">
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 mb-1">Your Phone /
+                                    Email</label>
+                                <input type="text" id="contactInfo" required
+                                    placeholder="e.g. +91 98765XXXXX or name@domain.com"
+                                    class="w-full bg-obsidian-900 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-neonCyan">
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 mb-1">Inquiry / Request
+                                    Details</label>
+                                <textarea id="contactMessage" rows="4" required
+                                    placeholder="Describe what you need support with..."
+                                    class="w-full bg-obsidian-900 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-neonCyan"></textarea>
+                            </div>
+
+                            <button type="submit"
+                                class="w-full bg-gradient-to-r from-neonCyan to-neonViolet text-obsidian-900 font-extrabold py-3 rounded-xl text-sm hover:brightness-110 transition shadow-lg shadow-neonCyan/10">
+                                Submit Direct Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-obsidian-900 border-t border-slate-800/80 py-8 text-center text-xs text-slate-500">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center space-x-2">
+                <div
+                    class="w-6 h-6 rounded-md bg-neonCyan text-black flex items-center justify-center font-bold text-xs">
+                    M</div>
+                <span class="font-bold text-slate-300">MYSTICERS HUB</span>
+                <span>© 2026. All rights reserved.</span>
+            </div>
+            <div class="flex space-x-6 text-slate-400">
+                <a href="#explore" class="hover:text-neonCyan">Directory</a>
+                <a href="#reviews" class="hover:text-neonCyan">Reviews</a>
+                <a href="#contact" class="hover:text-neonCyan">Support</a>
+                <button type="button" onclick="openAdminModalDirect()" class="hover:text-neonCyan text-slate-500">Master
+                    Admin</button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 1. PHONE LOGIN MODAL (NO-RELOAD VERSION) -->
+    <div id="phoneOtpModal"
+        class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div
+            class="glass-card max-w-md w-full p-6 sm:p-8 rounded-3xl animate-scale-in relative border border-slate-700">
+            <button type="button" onclick="closeModal('phoneOtpModal')"
+                class="absolute top-4 right-4 text-slate-400 hover:text-white p-2">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <!-- Step 1: Phone Input -->
+            <div id="otpStep1">
+                <div
+                    class="w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl mb-4">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </div>
+                <h3 class="text-2xl font-black text-white">Business Owner Login</h3>
+                <p class="text-xs text-slate-400 mt-1 mb-6">Enter your phone number to receive a 4-digit verification
+                    code on WhatsApp.</p>
+
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1.5">Mobile Phone Number</label>
+                        <div class="relative">
+                            <span
+                                class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm font-semibold">+91</span>
+                            <input type="tel" id="loginPhoneInput" placeholder="9876543210" maxlength="10"
+                                class="w-full bg-obsidian-900 border border-slate-700 rounded-xl pl-12 pr-4 py-3 text-white text-sm font-mono focus:outline-none focus:border-neonCyan tracking-wider">
+                        </div>
+                    </div>
+
+                    <button type="button" onclick="requestOtpCode()"
+                        class="w-full glow-btn bg-emerald-500 hover:bg-emerald-400 text-obsidian-900 font-bold py-3 rounded-xl text-sm transition flex items-center justify-center space-x-2">
+                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                        <span>Send WhatsApp OTP</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 2: Verification PIN -->
+            <div id="otpStep2" class="hidden">
+                <div
+                    class="w-12 h-12 rounded-2xl bg-neonViolet/10 text-neonViolet flex items-center justify-center text-xl mb-4">
+                    <i class="fa-solid fa-key"></i>
+                </div>
+                <h3 class="text-2xl font-black text-white">Security Verification</h3>
+                <p class="text-xs text-slate-400 mt-1 mb-6">Enter 4-digit code dispatched to <span
+                        id="targetPhoneDisplay" class="text-neonCyan font-mono font-bold">+91 XXXXX</span></p>
+
+                <div class="space-y-5">
+                    <div class="flex justify-center space-x-3">
+                        <input type="password" maxlength="4" id="otpCodeInput" placeholder="••••"
+                            class="w-48 text-center text-2xl font-mono tracking-[0.5em] bg-obsidian-900 border border-slate-700 rounded-xl py-3 text-neonCyan focus:outline-none focus:border-neonCyan">
+                    </div>
+
+                    <button type="button" onclick="verifyAndAuthenticate()"
+                        class="w-full glow-btn bg-gradient-to-r from-neonCyan to-neonViolet text-obsidian-900 font-extrabold py-3 rounded-xl text-sm hover:brightness-110 transition">
+                        Authenticate & Open Dashboard
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. BUSINESS OWNER EDIT DASHBOARD MODAL -->
+    <div id="businessEditModal"
+        class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+        <div
+            class="glass-card max-w-3xl w-full p-6 sm:p-8 rounded-3xl animate-scale-in relative border border-slate-700 max-h-[90vh] overflow-y-auto my-auto">
+            <button type="button" onclick="closeModal('businessEditModal')"
+                class="absolute top-5 right-5 text-slate-400 hover:text-white p-2">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+
+            <div class="flex items-center space-x-3 mb-6">
+                <div class="w-10 h-10 rounded-xl bg-neonCyan/20 text-neonCyan flex items-center justify-center text-lg">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-black text-white" id="editModalHeaderTitle">Edit Business Profile</h3>
+                    <p class="text-xs text-slate-400">Update your shop details, images, contacts, and services.</p>
+                </div>
+            </div>
+
+            <form onsubmit="saveBusinessProfileChanges(event)" class="space-y-6">
+                <input type="hidden" id="editBusinessId">
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">Business Name *</label>
+                        <input type="text" id="editName" required
+                            class="w-full bg-obsidian-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-neonCyan">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">Category *</label>
+                        <select id="editCategory" required
+                            class="w-full bg-obsidian-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-neonCyan">
+                            <option value="Web & Tech">Web & Tech</option>
+                            <option value="Design & Creative">Design & Creative</option>
+                            <option value="Marketing & SEO">Marketing & SEO</option>
+                            <option value="Food & Cafe">Food & Cafe</option>
+                            <option value="Fitness & Health">Fitness & Health</option>
+                            <option value="Legal & Finance">Legal & Finance</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">Tagline / Short Summary *</label>
+                    <input type="text" id="editTagline" required
+                        class="w-full bg-obsidian-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-neonCyan">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">Phone Number *</label>
+                        <input type="text" id="editPhone" required
+                            class="w-full bg-obsidian-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-neonCyan font-mono">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">WhatsApp Number *</label>
+                        <input type="text" id="editWhatsapp" required placeholder="919876543210"
+                            class="w-full bg-obsidian-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-neonCyan font-mono">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">Official Email *</label>
+                        <input type="email" id="editEmail" required
+                            class="w-full bg-obsidian-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-neonCyan">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">Shop Address *</label>
+                        <input type="text" id="editAddress" required
+                            class="w-full bg-obsidian-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-neonCyan">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">Google Maps Link</label>
+                        <input type="url" id="editMapUrl" placeholder="https://maps.google.com/..."
+                            class="w-full bg-obsidian-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-neonCyan">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">Full Detailed Description *</label>
+                    <textarea id="editDescription" rows="4" required
+                        class="w-full bg-obsidian-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-neonCyan leading-relaxed"></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-2">Offered Services (Comma
+                        Separated)</label>
+                    <input type="text" id="editServices" placeholder="e.g. Custom Web Development, API Integration"
+                        class="w-full bg-obsidian-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-neonCyan">
+                </div>
+
+                <div class="space-y-3 pt-2 border-t border-slate-800">
+                    <div class="flex items-center justify-between">
+                        <label class="text-xs font-semibold text-slate-300">Shop Images & Gallery</label>
+                    </div>
+
+                    <div id="editImageGalleryPreview" class="flex flex-wrap gap-3 py-2"></div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div class="flex gap-2">
+                            <input type="url" id="newImageUrlInput" placeholder="Paste Image URL..."
+                                class="w-full bg-obsidian-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-neonCyan">
+                            <button type="button" onclick="addImageUrlToGallery()"
+                                class="bg-slate-800 hover:bg-slate-700 text-neonCyan px-3 py-2 rounded-xl text-xs font-bold border border-slate-700">Add</button>
+                        </div>
+
+                        <div>
+                            <label
+                                class="block bg-obsidian-900 border border-dashed border-slate-700 hover:border-neonCyan text-slate-400 text-xs text-center py-2 px-3 rounded-xl cursor-pointer transition">
+                                <i class="fa-solid fa-upload mr-1"></i> Upload Image File from Device
+                                <input type="file" accept="image/*" onchange="handleFileUpload(event)" class="hidden">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-end space-x-3 pt-4 border-t border-slate-800">
+                    <button type="button" onclick="closeModal('businessEditModal')"
+                        class="px-5 py-2.5 rounded-xl border border-slate-700 text-slate-300 text-xs font-semibold hover:bg-slate-800 transition">
+                        Cancel
+                    </button>
+                    <button type="submit"
+                        class="glow-btn px-6 py-2.5 rounded-xl bg-neonCyan text-obsidian-900 font-extrabold text-xs hover:brightness-110 transition flex items-center space-x-2">
+                        <i class="fa-solid fa-floppy-disk"></i>
+                        <span>Save Profile Changes</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- 3. PUBLIC BUSINESS DETAILS MODAL (WITH RATING SYSTEM) -->
+    <div id="businessDetailModal"
+        class="fixed inset-0 bg-black/85 backdrop-blur-md z-40 hidden flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+        <div
+            class="glass-card max-w-3xl w-full p-6 sm:p-8 rounded-3xl animate-scale-in relative border border-slate-700 max-h-[92vh] overflow-y-auto my-auto">
+            <button type="button" onclick="closeModal('businessDetailModal')"
+                class="absolute top-5 right-5 text-slate-400 hover:text-white p-2 z-10 bg-black/50 rounded-full">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+
+            <!-- Header Image -->
+            <div
+                class="relative h-64 sm:h-80 -mx-6 -mt-6 sm:-mx-8 sm:-mt-8 mb-6 overflow-hidden rounded-t-3xl bg-slate-900">
+                <img id="detailMainImage" src="" alt="Business Main Image"
+                    onclick="openLightbox(this.src, 'Main Business Image')"
+                    class="w-full h-full object-cover cursor-zoom-in hover:scale-105 transition duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-obsidian-900 via-obsidian-900/30 to-transparent">
+                </div>
+
+                <div class="absolute bottom-4 left-6 right-6 flex items-end justify-between">
+                    <div>
+                        <span id="detailCategoryBadge"
+                            class="bg-neonCyan/20 text-neonCyan border border-neonCyan/30 text-xs px-3 py-1 rounded-full font-semibold uppercase tracking-wider">Category</span>
+                        <h2 id="detailTitle" class="text-3xl sm:text-4xl font-black text-white mt-2">Business Name</h2>
+                    </div>
+                    <div id="detailVerifiedBadge"></div>
+                </div>
+            </div>
+
+            <!-- Body -->
+            <div class="space-y-6">
+                <div
+                    class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-800 pb-4 gap-2">
+                    <p id="detailTagline" class="text-slate-300 font-medium text-sm sm:text-base">Tagline here</p>
+                    <div
+                        class="flex items-center space-x-2 bg-amberGold/10 border border-amberGold/30 text-amberGold px-3 py-1 rounded-xl text-xs font-bold w-fit">
+                        <i class="fa-solid fa-star"></i>
+                        <span id="detailRating">4.9 (12 reviews)</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <a id="detailWhatsappBtn" href="#" target="_blank"
+                        class="flex items-center justify-center space-x-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl text-xs transition shadow-lg shadow-emerald-900/20">
+                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                        <span>WhatsApp Chat</span>
+                    </a>
+
+                    <a id="detailEmailBtn" href="#"
+                        class="flex items-center justify-center space-x-2 bg-neonViolet hover:bg-violet-500 text-white font-bold py-3 rounded-xl text-xs transition shadow-lg shadow-violet-900/20">
+                        <i class="fa-solid fa-envelope text-lg"></i>
+                        <span>Send Email</span>
+                    </a>
+
+                    <a id="detailMapBtn" href="#" target="_blank"
+                        class="flex items-center justify-center space-x-2 bg-slate-800 hover:bg-slate-700 text-neonCyan font-bold py-3 rounded-xl text-xs transition border border-slate-700">
+                        <i class="fa-solid fa-location-dot text-lg"></i>
+                        <span>Google Maps</span>
+                    </a>
+                </div>
+
+                <div
+                    class="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-obsidian-900/90 p-4 rounded-2xl border border-slate-800 text-xs">
+                    <div>
+                        <span class="text-slate-500 block mb-1">Direct Phone Contact</span>
+                        <a id="detailPhone" href="#"
+                            class="text-slate-200 font-mono font-bold hover:text-neonCyan text-sm">--</a>
+                    </div>
+                    <div>
+                        <span class="text-slate-500 block mb-1">Location Address</span>
+                        <p id="detailAddress" class="text-slate-200 font-medium">--</p>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-2">About the Business</h4>
+                    <p id="detailDescription" class="text-slate-300 text-sm leading-relaxed whitespace-pre-line"></p>
+                </div>
+
+                <div>
+                    <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-3">Offered Services</h4>
+                    <div id="detailServicesContainer" class="flex flex-wrap gap-2"></div>
+                </div>
+
+                <div>
+                    <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-3">Shop Gallery & Portfolio</h4>
+                    <div id="detailGalleryContainer" class="grid grid-cols-3 sm:grid-cols-4 gap-3"></div>
+                </div>
+
+                <!-- USER RATING & REVIEW FORM FOR THIS BUSINESS -->
+                <div class="border-t border-slate-800 pt-6">
+                    <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-4">Rate & Review This Business
+                    </h4>
+
+                    <form onsubmit="submitBusinessReview(event)"
+                        class="bg-obsidian-900/80 p-4 rounded-2xl border border-slate-800 space-y-3 mb-6">
+                        <input type="hidden" id="bizReviewTargetId">
+                        <div class="flex items-center justify-center gap-2 star-rating text-xl text-slate-600"
+                            id="bizStarInput">
+                            <i class="fa-solid fa-star" onclick="setStarRating('biz', 1)"></i>
+                            <i class="fa-solid fa-star" onclick="setStarRating('biz', 2)"></i>
+                            <i class="fa-solid fa-star" onclick="setStarRating('biz', 3)"></i>
+                            <i class="fa-solid fa-star" onclick="setStarRating('biz', 4)"></i>
+                            <i class="fa-solid fa-star" onclick="setStarRating('biz', 5)"></i>
+                        </div>
+                        <input type="hidden" id="bizRatingVal" value="0">
+
+                        <input type="text" id="bizReviewerName" required placeholder="Your Name"
+                            class="w-full bg-obsidian-800 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-neonCyan">
+                        <textarea id="bizReviewComment" rows="2" required
+                            placeholder="Write your feedback for this business..."
+                            class="w-full bg-obsidian-800 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-neonCyan"></textarea>
+
+                        <button type="submit"
+                            class="w-full bg-amberGold hover:bg-amber-500 text-obsidian-900 font-bold py-2 rounded-xl text-xs transition">
+                            Submit Business Review
+                        </button>
+                    </form>
+
+                    <div id="businessReviewsList" class="space-y-3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 4. MASTER ADMIN MODAL -->
+    <div id="adminModal"
+        class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+        <div
+            class="glass-card max-w-4xl w-full p-6 sm:p-8 rounded-3xl animate-scale-in relative border border-slate-700 max-h-[90vh] overflow-y-auto my-auto">
+            <button type="button" onclick="closeModal('adminModal')"
+                class="absolute top-5 right-5 text-slate-400 hover:text-white p-2">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+
+            <div class="flex items-center space-x-3 mb-6">
+                <div
+                    class="w-10 h-10 rounded-xl bg-amberGold/20 text-amberGold flex items-center justify-center text-lg">
+                    <i class="fa-solid fa-crown"></i>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-black text-white">Mysticers Admin Portal</h3>
+                    <p class="text-xs text-slate-400">Platform Management Dashboard (Logged in as Master Founder)</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
+                <div class="bg-obsidian-900 p-4 rounded-2xl border border-slate-800 text-center">
+                    <span class="text-xs text-slate-500 block mb-1">Total Businesses</span>
+                    <span id="adminStatTotal" class="text-2xl font-black text-white font-mono">0</span>
+                </div>
+                <div class="bg-obsidian-900 p-4 rounded-2xl border border-slate-800 text-center">
+                    <span class="text-xs text-slate-500 block mb-1">Verified Partners</span>
+                    <span id="adminStatVerified" class="text-2xl font-black text-neonCyan font-mono">0</span>
+                </div>
+                <div class="bg-obsidian-900 p-4 rounded-2xl border border-slate-800 text-center">
+                    <span class="text-xs text-slate-500 block mb-1">Categories</span>
+                    <span class="text-2xl font-black text-neonViolet font-mono">6</span>
+                </div>
+                <div class="bg-obsidian-900 p-4 rounded-2xl border border-slate-800 text-center">
+                    <span class="text-xs text-slate-500 block mb-1">Status</span>
+                    <span
+                        class="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-2 py-1 rounded-full">ACTIVE</span>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs">
+                    <thead class="bg-obsidian-900 text-slate-400 uppercase font-bold border-b border-slate-800">
+                        <tr>
+                            <th class="py-3 px-4">Business</th>
+                            <th class="py-3 px-4">Category</th>
+                            <th class="py-3 px-4">Phone</th>
+                            <th class="py-3 px-4">Verification Status</th>
+                            <th class="py-3 px-4 text-right">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminTableBody" class="divide-y divide-slate-800 text-slate-300"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 5. LIGHTBOX MODAL -->
+    <div id="lightboxModal" style="z-index: 999999;"
+        class="fixed inset-0 bg-black/95 backdrop-blur-xl hidden flex flex-col items-center justify-center p-4">
+        <button type="button" onclick="closeLightbox()"
+            class="absolute top-6 right-6 text-white hover:text-neonCyan bg-slate-800/80 hover:bg-slate-700 w-12 h-12 rounded-full flex items-center justify-center text-xl transition z-50">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <div class="relative max-w-5xl max-h-[85vh] flex flex-col items-center justify-center animate-scale-in">
+            <img id="lightboxImage" src="" alt="Enlarged View"
+                class="max-w-full max-h-[80vh] object-contain rounded-2xl shadow-2xl border border-slate-800">
+            <p id="lightboxCaption" class="mt-4 text-slate-400 text-sm font-medium tracking-wide text-center"></p>
+        </div>
+    </div>
+
+
+    <!-- JAVASCRIPT LOGIC ENGINE -->
+    <script>
+        const MASTER_ADMIN_PHONE = "8905295230";
+
+        const INITIAL_BUSINESSES = [
+            {
+                id: "biz_1",
+                name: "Aura Studio & Web Design",
+                tagline: "Custom React, Next.js & UI/UX Solutions for Brands",
+                category: "Web & Tech",
+                phone: "9876500001",
+                whatsapp: "919876500001",
+                email: "hello@aurastudio.design",
+                address: "402 Cyber Heights, Tech Zone, City",
+                mapUrl: "https://maps.google.com",
+                description: "Aura Studio is an award-winning creative agency specializing in ultra-fast web applications, modern mobile app development, and luxury visual branding.",
+                services: ["Fullstack Web Development", "UI/UX Redesign", "Mobile App Development"],
+                images: [
+                    "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=800&q=80"
+                ],
+                rating: 4.9,
+                reviewsCount: 1,
+                userReviews: [
+                    { name: "Suresh Gupta", rating: 5, comment: "Top quality web work!", date: "2026-03-10" }
+                ],
+                verified: true,
+                ownerPhone: "9876500001"
+            },
+            {
+                id: "biz_2",
+                name: "Starlight Artisanal Cafe",
+                tagline: "Specialty Roasted Beans, Organic Pastries & Cozy Ambiance",
+                category: "Food & Cafe",
+                phone: "9876500003",
+                whatsapp: "919876500003",
+                email: "order@starlightcafe.com",
+                address: "15 Market Boulevard, Downtown Arts District",
+                mapUrl: "https://maps.google.com",
+                description: "Handcrafted espresso, artisan sourdough breads, and gourmet desserts served in a chic environment.",
+                services: ["Specialty Coffee Brews", "Fresh Daily Pastries", "Event Catering"],
+                images: [
+                    "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=800&q=80"
+                ],
+                rating: 5.0,
+                reviewsCount: 1,
+                userReviews: [
+                    { name: "Ananya Roy", rating: 5, comment: "Best cappuccino in town!", date: "2026-03-12" }
+                ],
+                verified: true,
+                ownerPhone: "9876500003"
+            }
+        ];
+
+        const INITIAL_PLATFORM_REVIEWS = [
+            { id: "pr_1", name: "Aarav Sharma", role: "Web Studio Owner", rating: 5, comment: "Mysticers is phenomenal! Managing my storefront details and viewing client inquiries is seamless." },
+            { id: "pr_2", name: "Priya Patel", role: "Regular User", rating: 5, comment: "Finding reliable local service providers in my city has never been this easy." }
+        ];
+
+        const MysticersAPI = {
+            getBusinesses: async () => {
+                const data = localStorage.getItem('mysticers_businesses');
+                if (!data) {
+                    localStorage.setItem('mysticers_businesses', JSON.stringify(INITIAL_BUSINESSES));
+                    return INITIAL_BUSINESSES;
+                }
+                return JSON.parse(data);
+            },
+            saveBusinesses: async (businesses) => {
+                localStorage.setItem('mysticers_businesses', JSON.stringify(businesses));
+            },
+            getPlatformReviews: async () => {
+                const data = localStorage.getItem('mysticers_platform_reviews');
+                if (!data) {
+                    localStorage.setItem('mysticers_platform_reviews', JSON.stringify(INITIAL_PLATFORM_REVIEWS));
+                    return INITIAL_PLATFORM_REVIEWS;
+                }
+                return JSON.parse(data);
+            },
+            savePlatformReviews: async (reviews) => {
+                localStorage.setItem('mysticers_platform_reviews', JSON.stringify(reviews));
+            },
+            getBusinessByOwnerPhone: async (phone) => {
+                const businesses = await MysticersAPI.getBusinesses();
+                return businesses.find(b => b.ownerPhone === phone || b.phone === phone);
+            },
+            updateBusiness: async (updatedBiz) => {
+                let businesses = await MysticersAPI.getBusinesses();
+                const index = businesses.findIndex(b => b.id === updatedBiz.id);
+                if (index !== -1) {
+                    businesses[index] = updatedBiz;
+                } else {
+                    businesses.push(updatedBiz);
+                }
+                await MysticersAPI.saveBusinesses(businesses);
+                return updatedBiz;
+            },
+            deleteBusiness: async (id) => {
+                let businesses = await MysticersAPI.getBusinesses();
+                businesses = businesses.filter(b => b.id !== id);
+                await MysticersAPI.saveBusinesses(businesses);
+            },
+            toggleVerify: async (id) => {
+                let businesses = await MysticersAPI.getBusinesses();
+                const biz = businesses.find(b => b.id === id);
+                if (biz) {
+                    biz.verified = !biz.verified;
+                    await MysticersAPI.saveBusinesses(businesses);
+                }
+            }
+        };
+
+        let currentBusinesses = [];
+        let currentPlatformReviews = [];
+        let loggedInSession = null;
+        let currentPendingPhone = ""; // FIXED TYPO HERE
+        let currentEditGalleryImages = [];
+
+        window.onload = async () => {
+            await refreshData();
+        };
+
+        async function refreshData() {
+            currentBusinesses = await MysticersAPI.getBusinesses();
+            currentPlatformReviews = await MysticersAPI.getPlatformReviews();
+            renderBusinessGrid();
+            renderPlatformReviews();
+            renderAdminTable();
+            updateStatsBadge();
+        }
+
+        function renderBusinessGrid() {
+            const grid = document.getElementById('businessGrid');
+            const empty = document.getElementById('emptyState');
+            const searchInputEl = document.getElementById('searchInput');
+            const categoryFilterEl = document.getElementById('categoryFilter');
+            const verifiedToggleEl = document.getElementById('verifiedOnlyToggle');
+            const sortSelectEl = document.getElementById('sortSelect');
+
+            const searchVal = searchInputEl ? searchInputEl.value.toLowerCase().trim() : "";
+            const categoryVal = categoryFilterEl ? categoryFilterEl.value : "ALL";
+            const verifiedOnly = verifiedToggleEl ? verifiedToggleEl.checked : false;
+            const sortVal = sortSelectEl ? sortSelectEl.value : "featured";
+
+            let filtered = currentBusinesses.filter(b => {
+                const matchesSearch = b.name.toLowerCase().includes(searchVal) ||
+                    b.description.toLowerCase().includes(searchVal) ||
+                    b.tagline.toLowerCase().includes(searchVal) ||
+                    b.address.toLowerCase().includes(searchVal);
+
+                const matchesCategory = categoryVal === 'ALL' || b.category === categoryVal;
+                const matchesVerified = !verifiedOnly || b.verified;
+
+                return matchesSearch && matchesCategory && matchesVerified;
+            });
+
+            if (sortVal === 'rating') {
+                filtered.sort((a, b) => b.rating - a.rating);
+            } else if (sortVal === 'newest') {
+                filtered.reverse();
+            }
+
+            const badge = document.getElementById('businessCountBadge');
+            if (badge) badge.innerText = filtered.length;
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                empty.classList.remove('hidden');
+                return;
+            }
+
+            empty.classList.add('hidden');
+            grid.innerHTML = filtered.map(b => `
+                <div class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between transition-all duration-300 hover:-translate-y-1">
+                    <div>
+                        <div class="relative h-48 overflow-hidden bg-slate-900">
+                            <img src="${b.images[0] || 'https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=800&q=80'}" 
+                                alt="${b.name}" 
+                                onclick="openLightbox('${b.images[0]}', '${b.name}')"
+                                class="w-full h-full object-cover cursor-zoom-in hover:scale-105 transition duration-500">
+                            
+                            <span class="absolute top-3 left-3 bg-obsidian-900/80 backdrop-blur-md text-neonCyan text-[11px] font-bold px-3 py-1 rounded-full border border-neonCyan/30">
+                                ${b.category}
+                            </span>
+
+                            ${b.verified ? `
+                                <span class="absolute top-3 right-3 bg-amberGold/20 backdrop-blur-md text-amberGold border border-amberGold/40 text-[11px] font-bold px-2.5 py-1 rounded-full flex items-center gap-1">
+                                    <i class="fa-solid fa-circle-check"></i> Verified
+                                </span>
+                            ` : ''}
+                        </div>
+
+                        <div class="p-5">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="text-xl font-extrabold text-white line-clamp-1">${b.name}</h3>
+                                <div class="flex items-center text-amberGold text-xs font-bold gap-1">
+                                    <i class="fa-solid fa-star"></i>
+                                    <span>${b.rating} (${b.reviewsCount || 0})</span>
+                                </div>
+                            </div>
+
+                            <p class="text-xs text-slate-400 line-clamp-2 mb-4 leading-relaxed">${b.tagline}</p>
+
+                            <div class="flex flex-wrap gap-1.5 mb-4">
+                                ${(b.services || []).slice(0, 3).map(s => `
+                                    <span class="text-[10px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded-md border border-slate-700/60">${s}</span>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="px-5 pb-5 pt-2 border-t border-slate-800/60 flex items-center justify-between gap-2">
+                        <button type="button" onclick="openBusinessDetail('${b.id}')" class="flex-grow bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold py-2.5 rounded-xl transition border border-slate-700">
+                            View & Rate
+                        </button>
+                        
+                        <a href="https://wa.me/${b.whatsapp}?text=Hello%20${encodeURIComponent(b.name)}%2C%20I%20found%20your%20business%20on%20Mysticers!" target="_blank" 
+                            class="bg-emerald-600/20 hover:bg-emerald-600 text-emerald-400 hover:text-white border border-emerald-500/30 p-2.5 rounded-xl transition flex items-center justify-center text-sm">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // =========================================================================
+        // AUTH & WHATSAPP OTP FUNCTIONS (RELOAD PROOF)
+        // =========================================================================    
+        async function requestOtpCode() {
+            const phoneInputEl = document.getElementById('loginPhoneInput');
+            if (!phoneInputEl) return;
+
+            const rawPhone = phoneInputEl.value.replace(/\D/g, '');
+
+            if (rawPhone.length < 10) {
+                showToast("Please enter a valid 10-digit mobile phone number.", "error");
+                return;
+            }
+
+            currentPendingPhone = rawPhone.slice(-10);
+
+            try {
+                showToast("Dispatching OTP via WhatsApp...", "info");
+
+                const response = await fetch('http://localhost:5000/api/send-otp', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ phone: currentPendingPhone })
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    const step1 = document.getElementById('otpStep1');
+                    const step2 = document.getElementById('otpStep2');
+                    const targetPhone = document.getElementById('targetPhoneDisplay');
+
+                    if (targetPhone) targetPhone.innerText = `+91 ${currentPendingPhone}`;
+                    if (step1) step1.classList.add('hidden');
+                    if (step2) step2.classList.remove('hidden');
+
+                    const otpCodeInput = document.getElementById('otpCodeInput');
+                    if (otpCodeInput) {
+                        otpCodeInput.value = '';
+                        otpCodeInput.focus();
+                    }
+
+                    showToast("OTP sent directly to your WhatsApp!", "success");
+                } else {
+                    showToast(data.error || "Failed to send OTP via WhatsApp.", "error");
+                }
+            } catch (err) {
+                console.error("Network Error:", err);
+                showToast("WhatsApp Bot server offline!", "error");
+            }
+        }
+
+        async function verifyAndAuthenticate() {
+            const otpInputEl = document.getElementById('otpCodeInput');
+            if (!otpInputEl) return;
+
+            const enteredOtp = otpInputEl.value.trim();
+
+            if (!enteredOtp || enteredOtp.length !== 4) {
+                showToast("Please enter the 4-digit code received on WhatsApp.", "error");
+                return;
+            }
+
+            try {
+                showToast("Verifying OTP...", "info");
+
+                const response = await fetch('http://localhost:5000/api/verify-otp', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ phone: currentPendingPhone, otp: enteredOtp })
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    closeModal('phoneOtpModal');
+
+                    if (currentPendingPhone === MASTER_ADMIN_PHONE) {
+                        loggedInSession = { phone: currentPendingPhone, isMasterAdmin: true, business: null };
+                        updateNavSessionUI();
+                        showWelcomeToast("Master Admin Founder");
+                        openModal('adminModal');
+                    } else {
+                        let matchedBiz = await MysticersAPI.getBusinessByOwnerPhone(currentPendingPhone);
+
+                        if (!matchedBiz) {
+                            matchedBiz = {
+                                id: "biz_" + Date.now(),
+                                name: "My New Business",
+                                tagline: "Short tagline for your business",
+                                category: "Web & Tech",
+                                phone: currentPendingPhone,
+                                whatsapp: "91" + currentPendingPhone,
+                                email: "owner@" + currentPendingPhone + ".com",
+                                address: "City Location",
+                                mapUrl: "https://maps.google.com",
+                                description: "Add your full business details here...",
+                                services: ["Primary Service"],
+                                images: ["https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=800&q=80"],
+                                rating: 5.0,
+                                reviewsCount: 0,
+                                userReviews: [],
+                                verified: false,
+                                ownerPhone: currentPendingPhone
+                            };
+                            await MysticersAPI.updateBusiness(matchedBiz);
+                            await refreshData();
+                        }
+
+                        loggedInSession = { phone: currentPendingPhone, isMasterAdmin: false, business: matchedBiz };
+                        updateNavSessionUI();
+                        showWelcomeToast(matchedBiz.name);
+                        openBusinessEditModal(matchedBiz.id);
+                    }
+                } else {
+                    showToast(data.error || "Invalid OTP code. Please try again.", "error");
+                }
+            } catch (err) {
+                console.error("Verification Error:", err);
+                showToast("Server communication error. Please try again.", "error");
+            }
+        }
+
+        // =========================================================================
+        // REVIEWS & RATINGS ENGINE
+        // =========================================================================
+        function setStarRating(type, val) {
+            if (type === 'platform') {
+                document.getElementById('platformRatingVal').value = val;
+                const stars = document.querySelectorAll('#platformStarInput i');
+                stars.forEach((star, idx) => {
+                    if (idx < val) {
+                        star.classList.remove('text-slate-600');
+                        star.classList.add('text-amberGold');
+                    } else {
+                        star.classList.remove('text-amberGold');
+                        star.classList.add('text-slate-600');
+                    }
+                });
+            } else if (type === 'biz') {
+                document.getElementById('bizRatingVal').value = val;
+                const stars = document.querySelectorAll('#bizStarInput i');
+                stars.forEach((star, idx) => {
+                    if (idx < val) {
+                        star.classList.remove('text-slate-600');
+                        star.classList.add('text-amberGold');
+                    } else {
+                        star.classList.remove('text-amberGold');
+                        star.classList.add('text-slate-600');
+                    }
+                });
+            }
+        }
+
+
+        async function submitPlatformReview(e) {
+            if (e) e.preventDefault();
+            const rating = parseInt(document.getElementById('platformRatingVal').value) || 0;
+            const name = document.getElementById('platformReviewerName').value.trim();
+            const role = document.getElementById('platformReviewerRole').value.trim();
+            const comment = document.getElementById('platformReviewComment').value.trim();
+
+            if (rating === 0) {
+                showToast("Please select a star rating (1-5 stars)", "error");
+                return false;
+            }
+
+            const newRev = { id: "pr_" + Date.now(), name, role, rating, comment };
+            currentPlatformReviews.unshift(newRev);
+            await MysticersAPI.savePlatformReviews(currentPlatformReviews);
+
+            renderPlatformReviews();
+            e.target.reset();
+            setStarRating('platform', 0);
+            showToast("Thank you for rating Mysticers!", "success");
+            return false;
+        }
+
+        function renderPlatformReviews() {
+            const container = document.getElementById('platformReviewsContainer');
+            if (!container) return;
+
+            container.innerHTML = currentPlatformReviews.map(r => `
+                <div class="glass-card p-6 rounded-3xl relative flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center space-x-1 text-amberGold mb-3 text-xs">
+                            ${Array.from({ length: 5 }, (_, i) => `<i class="fa-solid fa-star ${i < r.rating ? 'text-amberGold' : 'text-slate-700'}"></i>`).join('')}
+                        </div>
+                        <p class="text-slate-300 text-sm leading-relaxed italic mb-6">"${r.comment}"</p>
+                    </div>
+                    <div class="flex items-center space-x-3 pt-4 border-t border-slate-800">
+                        <div class="w-10 h-10 rounded-full bg-neonCyan/20 text-neonCyan font-bold flex items-center justify-center text-xs">
+                            ${r.name.charAt(0)}
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold text-sm">${r.name}</h4>
+                            <p class="text-xs text-slate-400">${r.role}</p>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function submitBusinessReview(e) {
+            if (e) e.preventDefault();
+            const bizId = document.getElementById('bizReviewTargetId').value;
+            const rating = parseInt(document.getElementById('bizRatingVal').value) || 0;
+            const name = document.getElementById('bizReviewerName').value.trim();
+            const comment = document.getElementById('bizReviewComment').value.trim();
+
+            if (rating === 0) {
+                showToast("Please select a star rating (1-5 stars)", "error");
+                return false;
+            }
+
+            const biz = currentBusinesses.find(b => b.id === bizId);
+            if (!biz) return false;
+
+            if (!biz.userReviews) biz.userReviews = [];
+            biz.userReviews.unshift({
+                name,
+                rating,
+                comment,
+                date: new Date().toISOString().split('T')[0]
+            });
+
+            const totalScore = biz.userReviews.reduce((sum, item) => sum + item.rating, 0);
+            biz.rating = parseFloat((totalScore / biz.userReviews.length).toFixed(1));
+            biz.reviewsCount = biz.userReviews.length;
+
+            await MysticersAPI.updateBusiness(biz);
+            await refreshData();
+
+            openBusinessDetail(bizId);
+            showToast("Your review has been published!", "success");
+            return false;
+        }
+
+        function openBusinessDetail(id) {
+            const biz = currentBusinesses.find(b => b.id === id);
+            if (!biz) return;
+
+            document.getElementById('bizReviewTargetId').value = biz.id;
+            document.getElementById('detailMainImage').src = biz.images[0] || 'https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=800&q=80';
+            document.getElementById('detailTitle').innerText = biz.name;
+            document.getElementById('detailCategoryBadge').innerText = biz.category;
+            document.getElementById('detailTagline').innerText = biz.tagline;
+            document.getElementById('detailRating').innerText = `${biz.rating} (${biz.reviewsCount || 0} reviews)`;
+            document.getElementById('detailPhone').innerText = `+91 ${biz.phone}`;
+            document.getElementById('detailPhone').href = `tel:+91${biz.phone}`;
+            document.getElementById('detailAddress').innerText = biz.address;
+            document.getElementById('detailDescription').innerText = biz.description;
+
+            document.getElementById('detailWhatsappBtn').href = `https://wa.me/${biz.whatsapp}?text=Hello%20${encodeURIComponent(biz.name)}%2C%20I%20am%20interested%20in%20your%20services!`;
+            document.getElementById('detailEmailBtn').href = `mailto:${biz.email}?subject=Business%20Inquiry%20via%20Mysticers`;
+            document.getElementById('detailMapBtn').href = biz.mapUrl || `https://maps.google.com/?q=${encodeURIComponent(biz.address)}`;
+
+            document.getElementById('detailVerifiedBadge').innerHTML = biz.verified ? `
+                <span class="bg-amberGold text-black font-extrabold text-xs px-3 py-1 rounded-full flex items-center gap-1 shadow-lg shadow-amberGold/20">
+                    <i class="fa-solid fa-circle-check"></i> Verified Partner
+                </span>
+            ` : '';
+
+            document.getElementById('detailServicesContainer').innerHTML = (biz.services || []).map(s => `
+                <span class="bg-obsidian-900 text-neonCyan border border-neonCyan/30 px-3 py-1 rounded-xl text-xs font-semibold">${s}</span>
+            `).join('');
+
+            document.getElementById('detailGalleryContainer').innerHTML = (biz.images || []).map(img => `
+                <div class="h-24 rounded-xl overflow-hidden bg-slate-900 border border-slate-800">
+                    <img src="${img}" onclick="openLightbox('${img}', '${biz.name}')" class="w-full h-full object-cover cursor-zoom-in hover:scale-110 transition duration-300">
+                </div>
+            `).join('');
+
+            const reviewsList = document.getElementById('businessReviewsList');
+            if (biz.userReviews && biz.userReviews.length > 0) {
+                reviewsList.innerHTML = biz.userReviews.map(rev => `
+                    <div class="bg-obsidian-900/60 p-3 rounded-xl border border-slate-800 text-xs">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="font-bold text-slate-200">${rev.name}</span>
+                            <div class="text-amberGold text-[10px]">
+                                ${Array.from({ length: 5 }, (_, i) => `<i class="fa-solid fa-star ${i < rev.rating ? 'text-amberGold' : 'text-slate-700'}"></i>`).join('')}
+                            </div>
+                        </div>
+                        <p class="text-slate-400 leading-relaxed">${rev.comment}</p>
+                    </div>
+                `).join('');
+            } else {
+                reviewsList.innerHTML = `<p class="text-xs text-slate-500 italic">No reviews yet for this business. Be the first to leave one!</p>`;
+            }
+
+            setStarRating('biz', 0);
+            openModal('businessDetailModal');
+        }
+
+        // =========================================================================
+        // HELPERS & MODALS
+        // =========================================================================
+        function handleFilterChange() { renderBusinessGrid(); }
+        function setCategoryQuickFilter(cat) { document.getElementById('categoryFilter').value = cat; renderBusinessGrid(); }
+        function resetFilters() { document.getElementById('searchInput').value = ''; document.getElementById('categoryFilter').value = 'ALL'; document.getElementById('verifiedOnlyToggle').checked = false; renderBusinessGrid(); }
+
+        function openPhoneModal() {
+            if (loggedInSession) {
+                if (loggedInSession.isMasterAdmin) { openModal('adminModal'); }
+                else if (loggedInSession.business) { openBusinessEditModal(loggedInSession.business.id); }
+                return;
+            }
+            document.getElementById('otpStep1').classList.remove('hidden');
+            document.getElementById('otpStep2').classList.add('hidden');
+            document.getElementById('loginPhoneInput').value = '';
+            openModal('phoneOtpModal');
+        }
+
+        function showWelcomeToast(name) {
+            const container = document.getElementById('toastContainer');
+            container.innerHTML = `
+                <div class="animate-toast glass-card bg-obsidian-800 border-2 border-neonCyan text-white px-6 py-4 rounded-2xl shadow-2xl flex items-center space-x-4 pointer-events-auto max-w-md">
+                    <div class="w-10 h-10 rounded-xl bg-neonCyan text-black flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-store"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs font-semibold text-neonCyan uppercase tracking-widest">Authentication Success</p>
+                        <h4 class="text-base font-extrabold">Welcome back, ${name}! 👋</h4>
+                    </div>
+                </div>
+            `;
+            setTimeout(() => { container.innerHTML = ''; }, 4000);
+        }
+
+        function updateNavSessionUI() {
+            const container = document.getElementById('navSessionContainer');
+            if (!loggedInSession) {
+                container.innerHTML = `
+                    <button type="button" onclick="openPhoneModal()" class="glow-btn bg-gradient-to-r from-neonCyan to-cyan-500 text-obsidian-900 font-bold px-5 py-2.5 rounded-xl flex items-center space-x-2 text-sm hover:brightness-110 active:scale-95 transition-all">
+                        <i class="fa-solid fa-store"></i>
+                        <span>Business Owner Login</span>
+                    </button>
+                `;
+            } else {
+                const label = loggedInSession.isMasterAdmin ? 'Admin Panel' : 'My Dashboard';
+                container.innerHTML = `
+                    <div class="flex items-center space-x-2">
+                        <button type="button" onclick="openPhoneModal()" class="bg-slate-800 hover:bg-slate-700 text-neonCyan border border-slate-700 px-4 py-2 rounded-xl text-xs font-bold transition flex items-center space-x-2">
+                            <i class="fa-solid fa-gauge-high"></i>
+                            <span>${label}</span>
+                        </button>
+                        <button type="button" onclick="logoutSession()" class="bg-red-500/10 hover:bg-red-500/20 text-red-400 p-2 rounded-xl border border-red-500/30 text-xs transition" title="Logout">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                        </button>
+                    </div>
+                `;
+            }
+        }
+
+        function logoutSession() {
+            loggedInSession = null;
+            updateNavSessionUI();
+            showToast("Successfully logged out.", "info");
+        }
+
+        async function openBusinessEditModal(id) {
+            const biz = currentBusinesses.find(b => b.id === id);
+            if (!biz) return;
+
+            document.getElementById('editBusinessId').value = biz.id;
+            document.getElementById('editName').value = biz.name;
+            document.getElementById('editCategory').value = biz.category;
+            document.getElementById('editTagline').value = biz.tagline;
+            document.getElementById('editPhone').value = biz.phone;
+            document.getElementById('editWhatsapp').value = biz.whatsapp;
+            document.getElementById('editEmail').value = biz.email;
+            document.getElementById('editAddress').value = biz.address;
+            document.getElementById('editMapUrl').value = biz.mapUrl || '';
+            document.getElementById('editDescription').value = biz.description;
+            document.getElementById('editServices').value = (biz.services || []).join(', ');
+
+            currentEditGalleryImages = [...(biz.images || [])];
+            renderEditGalleryPreviews();
+
+            document.getElementById('editModalHeaderTitle').innerText = `Editing: ${biz.name}`;
+            openModal('businessEditModal');
+        }
+
+        function renderEditGalleryPreviews() {
+            const container = document.getElementById('editImageGalleryPreview');
+            container.innerHTML = currentEditGalleryImages.map((img, index) => `
+                <div class="relative w-20 h-20 rounded-xl overflow-hidden border border-slate-700 bg-black">
+                    <img src="${img}" class="w-full h-full object-cover cursor-pointer" onclick="openLightbox('${img}', 'Gallery Preview')">
+                    <button type="button" onclick="removeImageFromGallery(${index})" class="absolute top-1 right-1 bg-red-600 text-white w-5 h-5 rounded-full flex items-center justify-center text-[10px]">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function addImageUrlToGallery() {
+            const urlInput = document.getElementById('newImageUrlInput');
+            if (urlInput.value.trim()) {
+                currentEditGalleryImages.push(urlInput.value.trim());
+                urlInput.value = '';
+                renderEditGalleryPreviews();
+            }
+        }
+
+        function removeImageFromGallery(index) {
+            currentEditGalleryImages.splice(index, 1);
+            renderEditGalleryPreviews();
+        }
+
+        function handleFileUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                currentEditGalleryImages.push(e.target.result);
+                renderEditGalleryPreviews();
+                showToast("Local device image uploaded to gallery!", "success");
+            };
+            reader.readAsDataURL(file);
+        }
+
+        async function saveBusinessProfileChanges(event) {
+            if (event) event.preventDefault();
+            const id = document.getElementById('editBusinessId').value;
+            const existing = currentBusinesses.find(b => b.id === id) || {};
+
+            const updated = {
+                ...existing,
+                id: id,
+                name: document.getElementById('editName').value.trim(),
+                category: document.getElementById('editCategory').value,
+                tagline: document.getElementById('editTagline').value.trim(),
+                phone: document.getElementById('editPhone').value.trim(),
+                whatsapp: document.getElementById('editWhatsapp').value.trim(),
+                email: document.getElementById('editEmail').value.trim(),
+                address: document.getElementById('editAddress').value.trim(),
+                mapUrl: document.getElementById('editMapUrl').value.trim(),
+                description: document.getElementById('editDescription').value.trim(),
+                services: document.getElementById('editServices').value.split(',').map(s => s.trim()).filter(Boolean),
+                images: currentEditGalleryImages.length > 0 ? currentEditGalleryImages : ["https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=800&q=80"]
+            };
+
+            await MysticersAPI.updateBusiness(updated);
+            await refreshData();
+            closeModal('businessEditModal');
+            showToast("Business profile updated successfully!", "success");
+            return false;
+        }
+
+        function openLightbox(src, caption) {
+            document.getElementById('lightboxImage').src = src;
+            document.getElementById('lightboxCaption').innerText = caption || '';
+            document.getElementById('lightboxModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightboxModal').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        function openAdminModalDirect() {
+            if (!loggedInSession || !loggedInSession.isMasterAdmin) {
+                openPhoneModal();
+                showToast("Please authenticate as Master Admin.", "info");
+            } else { openModal('adminModal'); }
+        }
+
+        function renderAdminTable() {
+            const tbody = document.getElementById('adminTableBody');
+            if (!tbody) return;
+            tbody.innerHTML = currentBusinesses.map(b => `
+                <tr class="hover:bg-slate-900/50 transition">
+                    <td class="py-3 px-4 font-bold text-white">${b.name}</td>
+                    <td class="py-3 px-4 text-slate-400">${b.category}</td>
+                    <td class="py-3 px-4 font-mono text-neonCyan">+91 ${b.phone}</td>
+                    <td class="py-3 px-4">
+                        <button type="button" onclick="toggleVerifyBadge('${b.id}')" class="px-3 py-1 rounded-lg text-xs font-bold transition ${b.verified ? 'bg-amberGold/20 text-amberGold border border-amberGold/40' : 'bg-slate-800 text-slate-400'}">
+                            ${b.verified ? 'Verified ✓' : 'Unverified'}
+                        </button>
+                    </td>
+                    <td class="py-3 px-4 text-right space-x-2">
+                        <button type="button" onclick="openBusinessEditModal('${b.id}')" class="text-neonCyan hover:underline font-bold">Edit</button>
+                        <button type="button" onclick="adminDeleteBusiness('${b.id}')" class="text-red-400 hover:underline font-bold">Delete</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        async function toggleVerifyBadge(id) {
+            await MysticersAPI.toggleVerify(id);
+            await refreshData();
+            showToast("Verification status updated!", "success");
+        }
+
+        async function adminDeleteBusiness(id) {
+            if (confirm("Are you sure you want to delete this business listing?")) {
+                await MysticersAPI.deleteBusiness(id);
+                await refreshData();
+                showToast("Business listing deleted.", "info");
+            }
+        }
+
+        function updateStatsBadge() {
+            const totalEl = document.getElementById('adminStatTotal');
+            const verifiedEl = document.getElementById('adminStatVerified');
+            if (totalEl) totalEl.innerText = currentBusinesses.length;
+            if (verifiedEl) verifiedEl.innerText = currentBusinesses.filter(b => b.verified).length;
+        }
+
+        function handleContactSubmit(e) {
+            if (e) e.preventDefault();
+            showToast(`Thank you! Your inquiry has been sent. Our team will contact you soon.`, "success");
+            e.target.reset();
+            return false;
+        }
+
+        function showToast(msg, type = "info") {
+            const container = document.getElementById('toastContainer');
+            const colorClass = type === "success" ? "border-emerald-500 text-emerald-400" : (type === "error" ? "border-red-500 text-red-400" : "border-neonCyan text-neonCyan");
+
+            container.innerHTML = `
+                <div class="animate-toast glass-card bg-obsidian-800 border-2 ${colorClass} text-white px-5 py-3 rounded-2xl shadow-2xl flex items-center space-x-3 pointer-events-auto">
+                    <i class="fa-solid fa-circle-info text-lg"></i>
+                    <span class="text-xs font-semibold">${msg}</span>
+                </div>
+            `;
+            setTimeout(() => { container.innerHTML = ''; }, 3500);
+        }
+
+        function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
+        function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+        function toggleMobileNav() { document.getElementById('mobileDrawer').classList.toggle('hidden'); }
+        function resetView() { window.scrollTo({ top: 0, behavior: 'smooth' }); resetFilters(); }
+    </script>
+
+</body>
+
+</html>
